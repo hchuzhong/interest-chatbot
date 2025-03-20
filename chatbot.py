@@ -4,12 +4,14 @@ import logging
 import os
 from dotenv import load_dotenv
 from bu_chatgpt import HKBU_ChatGPT
+from db import connect_to_db
 
 load_dotenv()
 
+db, client = connect_to_db()
+
 def main():
     token = os.getenv('TELEGRAM_ACCESS_TOKEN')
-    print('TELEGRAM_ACCESS_TOKEN:', token)
     updater = Updater(token=token, use_context=True)
     dispatcher = updater.dispatcher
 

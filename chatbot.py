@@ -22,17 +22,10 @@ def main():
     chatgpt = HKBU_ChatGPT()
     chatgpt_handler = MessageHandler(Filters.text & (~Filters.command), equip_chatgpt)
 
-    echo_handler = MessageHandler(Filters.text & (~Filters.command), echo)
     dispatcher.add_handler(chatgpt_handler)
 
     updater.start_polling()
     updater.idle()
-
-def echo(update, context):
-    reply_message = update.message.text.upper()
-    logging.info("Update: " + str(update))
-    logging.info("Context: " + str(context))
-    context.bot.send_message(chat_id=update.effective_chat.id, text=reply_message)
 
 def equip_chatgpt(update, context):
     global chatgpt

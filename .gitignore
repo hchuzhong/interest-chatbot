@@ -2,3 +2,4 @@
 .env
 self.md
 __pycache__
+test.py

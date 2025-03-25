@@ -14,5 +14,5 @@ if not MONGODB_URI:
 # Connect to MongoDB
 def connect_to_db():
     client = MongoClient(MONGODB_URI)
-    db = client['bookingsDB']
+    db = client['userInterestsDB']
     return db, client

@@ -142,7 +142,7 @@ def get_user_interest(update, context):
 
 def format_response(user_interests, matched_users, related_events):
     # Convert interest to a readable string (single interest here)
-    interest_str = user_interests[0] if user_interests else "your interests"
+    interest_str = ' and '.join(user_interests) if len(user_interests) > 1 else user_interests[0]
 
     # Format matched users
     user_list = "\n- " + "\n- ".join([user["username"] for user in matched_users]) if matched_users else "None found yet!"

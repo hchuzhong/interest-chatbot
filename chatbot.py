@@ -157,7 +157,7 @@ def format_response(user_interests, matched_users, related_events):
     response = (
         f"Hey! Since you love *{interest_str}*, I found some folks and events you might enjoy:\n\n"
         f"**People who share your vibe:**\n{user_list}\n\n"
-        f"**Upcoming Virtual Art Events:**\n{event_str}\n\n"
+        f"**Upcoming Events:**\n{event_str}\n\n"
         f"Feel free to connect with these users or join an event—let me know what you think!"
     )
     return response

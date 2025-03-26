@@ -3,3 +3,6 @@
 self.md
 __pycache__
 test.py
+Dockerfile
+deploy.sh
+chatbot.tar

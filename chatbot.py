@@ -31,7 +31,7 @@ def main():
 
 def get_data(update, context):
     user_id = update.message.chat.id
-    user = db.users.find_one({"userId": str(user_id)})
+    user = db.users.find_one({"telegramId": str(user_id)})
     if user:
         return user
     else:
@@ -68,7 +68,7 @@ def update_user_interests(update, cur_user, interests):
     new_interests = cur_user['interests'] + interests
     new_interests = list(set(new_interests))  # Remove duplicates
     db.users.update_one(
-        {"userId": str(update.message.chat.id)},
+        {"telegramId": str(update.message.chat.id)},
         {"$set": {"interests": new_interests}}
     )
 
@@ -76,7 +76,7 @@ def update_user_interests(update, cur_user, interests):
 def insert_new_user(update, interests):
     """Insert a new user with their interests into the database."""
     db.users.insert_one({
-        "userId": str(update.message.chat.id),
+        "telegramId": str(update.message.chat.id),
         "interests": interests,
         "username": update.message.chat.first_name,
         "lastUpdated": datetime.datetime.now()
@@ -92,11 +92,11 @@ def find_users_with_similar_interests(update, interests):
     for interest in interests:
         users = db.users.find({
             "interests": {"$elemMatch": {"$regex": f".*{interest}.*", "$options": "i"}},
-            "userId": {"$ne": str(update.message.chat.id)}
+            "telegramId": {"$ne": str(update.message.chat.id)}
         })
         if users:
             for user in users:
-                user_list.append({'userId': user['userId'], 'username': user['username']})
+                user_list.append({'telegramId': user['telegramId'], 'username': user['username']})
                 cur_users_num += 1
                 if cur_users_num >= max_users_num:
                     break
